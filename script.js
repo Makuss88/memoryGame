@@ -7,9 +7,22 @@ let cards = document.querySelectorAll('div');
 // console.log(cards);
 cards = [...cards];
 
+let activeCard = '';
+const activeCards = [];
 
-const clickCard = () => {
-  console.log('klikanie!');
+let gameResults = 0;
+const gameParts = cards.lenght / 2;
+
+const clickCard = function () {
+  activeCard = this;
+  activeCard.classList.remove('hidden');
+  
+  //first or second card
+  if (activeCards.length === 0) {
+    activeCards[0] = activeCard;
+  } else {
+    cards.forEach(card => card.removeEventListener('click', clickCard));
+  }
 }
 
 const init = () => {
@@ -24,7 +37,7 @@ const init = () => {
         card.classList.add('hidden')
         card.addEventListener('click', clickCard);
       });
-  }, 2000);
+  }, 3000);
 };
 
 init();
